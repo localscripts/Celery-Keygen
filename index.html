@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Generator</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00FF00;
+      font-family: "Courier New", Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .key {
+      font-size: 1.5em;
+      letter-spacing: 0.2em;
+      margin: 5px 0;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 24px;
+      background-color: #00FF00;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+    button {
+      background-color: #00FF00;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button id="generate-button">DDOS Celery Keys</button>
+  <div id="keys-container"></div>
+</div>
+
+<script>
+  function generateRandomKey() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let key = '';
+    for (let i = 0; i < 16; i++) {
+      if (i > 0 && i % 4 === 0) {
+        key += '-';
+      }
+      key += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return key;
+  }
+
+  function typeKey(key, index) {
+    const keysContainer = document.getElementById('keys-container');
+    const keyElement = document.createElement('div');
+    keyElement.className = 'key';
+    keysContainer.appendChild(keyElement);
+
+    let charIndex = 0;
+    function typeChar() {
+      if (charIndex < key.length) {
+        keyElement.textContent += key.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 100); // Speed up typing speed
+      } else {
+        keyElement.appendChild(document.createElement('div')).className = 'cursor'; // Add cursor at end
+      }
+    }
+
+    setTimeout(typeChar, index * 300); // Start typing with a delay based on key index
+  }
+
+  function generateKeys() {
+    const keysContainer = document.getElementById('keys-container');
+    keysContainer.innerHTML = ''; // Clear previous keys
+
+    for (let i = 0; i < 50; i++) {
+      const key = generateRandomKey();
+      typeKey(key, i);
+    }
+  }
+
+  document.getElementById('generate-button').onclick = generateKeys;
+</script>
+
+</body>
+</html>
