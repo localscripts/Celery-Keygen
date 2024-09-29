@@ -6,7 +6,30 @@
 <!-- DONT SKID MY SHITT SKIDDIES -->
 <!-- DONT SKID MY SHITT SKIDDIES -->
 <!-- DONT SKID MY SHITT SKIDDIES -->
-
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
+<!-- DONT SKID MY SHITT SKIDDIES -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,6 +165,23 @@
     .links a:hover {
       color: #82ffc9;
     }
+
+    /* Loading Spinner */
+    .spinner {
+      border: 8px solid rgba(255, 255, 255, 0.2);
+      border-top: 8px solid #00FF00;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      display: none; /* Initially hidden */
+      margin: 20px auto; /* Center the spinner */
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -155,6 +195,9 @@
 <div class="container">
   <button id="generate-button">Connect to https://celery.zip/api/key/</button>
   <div id="keys-container"></div>
+
+  <!-- Loading Spinner -->
+  <div class="spinner" id="loading-spinner"></div>
 
   <!-- Links Section -->
   <div class="links">
@@ -175,7 +218,7 @@
     return key;
   }
 
-  function typeKey(key, index) {
+  function typeKey(key) {
     const keysContainer = document.getElementById('keys-container');
     const keyElement = document.createElement('div');
     keyElement.className = 'key';
@@ -192,17 +235,28 @@
       }
     }
 
-    setTimeout(typeChar, index * 300); // Start typing with a delay based on key index
+    setTimeout(typeChar, 100); // Show the key instantly
   }
 
   function generateKeys() {
     const keysContainer = document.getElementById('keys-container');
+    const loadingSpinner = document.getElementById('loading-spinner');
     keysContainer.innerHTML = ''; // Clear previous keys
+    loadingSpinner.style.display = 'block'; // Show the loading spinner
 
-    for (let i = 0; i < 50; i++) {
-      const key = generateRandomKey();
-      typeKey(key, i);
-    }
+    const totalKeys = 50;
+    let keysGenerated = 0;
+
+    const intervalId = setInterval(() => {
+      if (keysGenerated < totalKeys) {
+        const key = generateRandomKey();
+        typeKey(key);
+        keysGenerated++;
+      } else {
+        clearInterval(intervalId);
+        loadingSpinner.style.display = 'none'; // Hide the loading spinner after all keys are generated
+      }
+    }, 3000); // Show each key every 3 seconds
   }
 
   document.getElementById('generate-button').onclick = generateKeys;
