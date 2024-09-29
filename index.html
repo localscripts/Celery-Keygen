@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Key Generator</title>
+  <title>Genery</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Genery - Celery Key Generator">
+  <meta property="og:description" content="Totally real not fake key generator. Generate keys instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robloxhackers.lol/Celery-Keygen/">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/99403280?s=200&v=4">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#00FF00">
+
   <style>
     body {
       background-color: black;
@@ -16,14 +27,28 @@
       height: 100vh;
       margin: 0;
     }
+
+    .header {
+      background-color: #007700;
+      color: white;
+      padding: 20px;
+      font-size: 1.5em;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
     .container {
       text-align: center;
     }
+
     .key {
       font-size: 1.5em;
       letter-spacing: 0.2em;
       margin: 5px 0;
     }
+
     .cursor {
       display: inline-block;
       width: 10px;
@@ -31,6 +56,7 @@
       background-color: #00FF00;
       animation: blink 1s infinite;
     }
+
     @keyframes blink {
       0%, 50% {
         opacity: 1;
@@ -39,6 +65,7 @@
         opacity: 0;
       }
     }
+
     button {
       background-color: #00FF00;
       color: black;
@@ -48,6 +75,7 @@
       cursor: pointer;
       margin-top: 20px;
     }
+
     button:hover {
       opacity: 0.8;
     }
@@ -56,7 +84,7 @@
 <body>
 
 <div class="container">
-  <button id="generate-button">DDOS Celery Keys</button>
+  <button id="generate-button">Generate Keys</button>
   <div id="keys-container"></div>
 </div>
 
